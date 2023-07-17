@@ -1,4 +1,5 @@
 
+import 'package:careerpoint2/login/login.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -164,6 +165,13 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text('Already a member',style: TextStyle(fontWeight: FontWeight.bold),),
+                TextButton(onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                }, child: Text('Login',style: TextStyle(fontWeight: FontWeight.bold),)),
                  ],
             ),
           ),

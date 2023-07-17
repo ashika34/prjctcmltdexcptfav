@@ -1,4 +1,5 @@
 
+import 'package:careerpoint2/empaccount/empaccnt.dart';
 import 'package:careerpoint2/firstscreen/firstscreen.dart';
 import 'package:careerpoint2/firstscreen/view/aboutus.dart';
 import 'package:careerpoint2/homepage/home.dart';
@@ -122,6 +123,22 @@ class _FirstScreenState extends State<FirstScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        child: ElevatedButton(onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => EmpAccnt(),));
+                        }, child: Text('Find Cvs'),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          )
+                        ),
+                       ),
+                ),
                     ],
                   ),
                 ),

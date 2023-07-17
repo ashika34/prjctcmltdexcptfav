@@ -1,4 +1,5 @@
 import 'package:careerpoint2/contactus/contactus.dart';
+import 'package:careerpoint2/empaccount/empaccnt.dart';
 import 'package:careerpoint2/employers/employers.dart';
 import 'package:careerpoint2/firstscreen/firstscreen.dart';
 import 'package:careerpoint2/firstscreen/view/aboutus.dart';
@@ -27,7 +28,7 @@ class MyDrawer extends StatelessWidget {
                 Text('Job opportunities waiting for you at Careerpoint'),
 
             currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avathr.png'),
+              backgroundImage: AssetImage('assets/images/avathar.png'),
             ),
             
           ),
@@ -96,7 +97,7 @@ class MyDrawer extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>Employers(),));
+                        MaterialPageRoute(builder: (context) =>EmpAccnt(),));
                   },
                   child: Text(
                     'Employers',

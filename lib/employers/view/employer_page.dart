@@ -15,11 +15,14 @@ class _EmployersState extends State<Employers> {
   TextEditingController monthlysalary = TextEditingController();
   TextEditingController hiringprocess = TextEditingController();
   TextEditingController jobdescription = TextEditingController();
+  List<String> jobTypes = ['Any', 'Full time', 'Part time','internship'];
+  String? _selectedJobType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text('Post your Job'),
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
@@ -71,15 +74,26 @@ class _EmployersState extends State<Employers> {
                 SizedBox(
                   height: 55,
                 ),
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  controller: jobtype,
-                  decoration: InputDecoration(
-                    labelText: 'Job Type',
-                    border: OutlineInputBorder(),
-                    suffixIcon: Icon(Icons.arrow_downward),
+                DropdownButtonFormField<String>(
+                value: _selectedJobType,
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedJobType = newValue;
+                  });
+                },
+                items: jobTypes.map((type) {
+                  return DropdownMenuItem<String>(
+                    value: type,
+                    child: Text(type),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  labelText: 'Job type',
+                  border: OutlineInputBorder(
+                    
                   ),
                 ),
+              ),
                 SizedBox(
                   height: 55,
                 ),

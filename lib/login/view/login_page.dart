@@ -18,12 +18,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        title: Center(
-            child: Text(
+        title: Text(
           'Hello Again',
           style: TextStyle(fontWeight: FontWeight.bold),
-        )),
+        ),
       ),
       
       body: SingleChildScrollView(
