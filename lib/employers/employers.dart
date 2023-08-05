@@ -1,1 +1,1 @@
-export 'view/employer_page.dart';
+export 'view/jobreq_page.dart';

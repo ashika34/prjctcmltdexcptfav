@@ -1,22 +1,30 @@
 
 import 'package:careerpoint2/login/login.dart';
+import 'package:careerpoint2/signup/repo/signup_repo.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  // const SignUp({Key? key}) : super(key: key);
+    SignUp({super.key});
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
+//   State<SignUp> createState() => _SignUpState();
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     throw UnimplementedError();
+//   }
+// }
 
-class _SignUpState extends State<SignUp> {
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
-  TextEditingController location = TextEditingController();
-  TextEditingController experience= TextEditingController();
-  TextEditingController qualification= TextEditingController();
+// class _SignUpState extends State<SignUp> {
+  final TextEditingController name = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
+  final TextEditingController location = TextEditingController();
+  final TextEditingController experience= TextEditingController();
+  final TextEditingController qualification= TextEditingController();
+   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +43,7 @@ class _SignUpState extends State<SignUp> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
           child: Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +58,13 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 55,
                 ),
-                TextFormField(
+                Container(
+               child:  TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please fill this field";
+                    }
+                  },
                   controller: name,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
@@ -58,10 +73,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: const Icon(Icons.person, color: Colors.black),
                   ),
                 ),
+            ),
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
+                Container(
+                child:TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please fill this field";
+                    }
+                  },
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -70,10 +92,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: const Icon(Icons.email, color: Colors.black),
                   ),
                 ),
+                ),
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
+                Container(
+                child:TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please fill this field";
+                    }
+                  },
                   controller: password,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
@@ -82,10 +111,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: const Icon(Icons.password, color: Colors.black),
                   ),
                 ),
+                ),
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
+                Container(
+                child:TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please fill this field";
+                    }
+                  },
                   controller: phoneNumber,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
@@ -94,10 +130,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: const Icon(Icons.phone, color: Colors.black),
                   ),
                 ),
+                ),
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
+                Container(
+                child:TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please fill this field";
+                    }
+                  },
                   controller: location,
                   keyboardType:TextInputType.streetAddress,
                   decoration: InputDecoration(
@@ -106,10 +149,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: Icon(Icons.pin_drop,color: Colors.black),
                   ),
                   ),
+                ),
                   SizedBox(
                     height: 25
                   ),
-                  TextFormField(
+                  Container(
+                  child:TextFormField(
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Please fill this field";
+                      }
+                    },
                   controller: experience,
                   keyboardType:TextInputType.datetime,
                   decoration: InputDecoration(
@@ -118,10 +168,17 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: Icon(Icons.work_history,color: Colors.black),
                   ),
                   ),
+                  ),
                   SizedBox(
                     height: 25
                   ),
-                  TextFormField(
+                  Container(
+                  child:TextFormField(
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Please fill this field";
+                      }
+                    },
                   controller: qualification,
                   keyboardType:TextInputType.text,
                   decoration: InputDecoration(
@@ -130,18 +187,19 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: Icon(Icons.school,color: Colors.black),
                   ),
                   ),
-                  SizedBox(
-                    height: 25
                   ),
-                  ElevatedButton(onPressed: () {
+                  // SizedBox(
+                  //   height: 25
+                  // ),
+                  // ElevatedButton(onPressed: () {
                     
-                  }, child: Text('Upload Resume'),
-                  style:ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)
-                    )
-                  ),
-                  ),
+                  // }, child: Text('Upload Resume'),
+                  // style:ElevatedButton.styleFrom(
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(20)
+                  //   )
+                  // ),
+                  // ),
                   SizedBox(
                   height: 20,
 
@@ -151,10 +209,22 @@ class _SignUpState extends State<SignUp> {
                   width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) 
+                        await SignupRepo().createUser(
+                        name.text,
+                       email.text,
+                       password.text,
+                         phoneNumber.text,
+                          location.text,
+                          experience.text,
+                           qualification.text, context);
+                           ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Signup successful'),
+                            ),);
+                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     child: const Text('Sign Up'),
@@ -180,3 +250,6 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+
+
+

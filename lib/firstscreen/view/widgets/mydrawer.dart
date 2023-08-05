@@ -9,6 +9,7 @@ import 'package:careerpoint2/signup/signup.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
+  
   void handleDrawerItemTap(BuildContext context) {
     // Handle drawer item tap here
     Navigator.pop(context); // Close the drawer
@@ -58,7 +59,7 @@ class MyDrawer extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SignUp()));
+                      MaterialPageRoute(builder: (context) => SignUp()));
                 },
                 child: const Text('Sign Up'),
                 style: ElevatedButton.styleFrom(

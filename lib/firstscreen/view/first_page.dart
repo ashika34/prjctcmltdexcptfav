@@ -3,6 +3,7 @@ import 'package:careerpoint2/empaccount/empaccnt.dart';
 import 'package:careerpoint2/firstscreen/firstscreen.dart';
 import 'package:careerpoint2/firstscreen/view/aboutus.dart';
 import 'package:careerpoint2/homepage/home.dart';
+import 'package:careerpoint2/login/view/login_page.dart';
 import 'package:careerpoint2/signup/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +82,7 @@ class _FirstScreenState extends State<FirstScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomePage(),
+                                builder: (context) => const LoginPage(),
                               ),
                             );
                           },
@@ -111,7 +112,7 @@ class _FirstScreenState extends State<FirstScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SignUp(),
+                                builder: (context) => SignUp(),
                               ),
                             );
                           },

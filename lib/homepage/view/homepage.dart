@@ -1,10 +1,8 @@
 
 import 'package:careerpoint2/firstscreen/firstscreen.dart';
 import 'package:careerpoint2/profile/profile.dart';
-
 import 'package:careerpoint2/searchjobs/search.dart';
 import 'package:flutter/material.dart';
-
 import '../../favorite/favorite.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,8 +79,7 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        
-        color: Color(0xFF13B9FF),
+     color: Color(0xFF13B9FF),
         child: TabBar(
           controller: _tabController,
           isScrollable: true,
