@@ -10,6 +10,7 @@ class SearchJobs extends StatefulWidget {
 class _SearchJobsState extends State<SearchJobs> {
   TextEditingController jobtitle = TextEditingController();
   TextEditingController location = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

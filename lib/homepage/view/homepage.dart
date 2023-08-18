@@ -2,6 +2,7 @@
 import 'package:careerpoint2/firstscreen/firstscreen.dart';
 import 'package:careerpoint2/profile/profile.dart';
 import 'package:careerpoint2/searchjobs/search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../favorite/favorite.dart';
 
@@ -74,7 +75,52 @@ class _HomePageState extends State<HomePage>
             SizedBox(
               height: 15,
             ),
-            MyCard(),
+
+        
+
+StreamBuilder<QuerySnapshot>(
+   stream: FirebaseFirestore.instance.collection('jobcollection').snapshots(),
+  builder: ( context, snapshot) {
+     if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          }
+
+           if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+
+          //  List<DocumentSnapshot> jobDocs = snapshot.data!.docs;
+           final jobDocs = snapshot.data!.docs as List<QueryDocumentSnapshot<Map<String, dynamic>>>;
+          // Use jobDocs to build your UI
+          return Expanded(
+            child: ListView.builder(
+              itemCount: jobDocs.length,
+              itemBuilder: (context, index) {
+                // Access fields using jobDocs[index].data()
+                Map<String, dynamic> jobData = jobDocs[index].data() as Map<String, dynamic>;
+          
+
+
+          return MyCard(job: jobDocs[index]);
+                // return ListTile(
+                //   title: Text(jobData['job title'] as String),
+                 
+                //   // You can display more fields here
+                // );
+              },
+            ),
+          );
+
+  
+},),
+
+            
+            // MyCard(),
           ],
         ),
       ),
@@ -83,8 +129,8 @@ class _HomePageState extends State<HomePage>
         child: TabBar(
           controller: _tabController,
           isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(horizontal: 10),
-          unselectedLabelStyle: TextStyle(fontSize: 12),
+          labelPadding: EdgeInsets.symmetric(horizontal: 9),
+          unselectedLabelStyle: TextStyle(fontSize: 11),
           tabs: [
             Tab(
               icon: IconButton(
@@ -116,7 +162,7 @@ class _HomePageState extends State<HomePage>
               text: 'Favorite',
             ),
             SizedBox(
-              width: 10,
+              width: 9,
             ),
             Tab(
               icon: IconButton(
@@ -132,7 +178,7 @@ class _HomePageState extends State<HomePage>
               text: 'Search',
             ),
             SizedBox(
-              width: 10,
+              width: 9,
             ),
             Tab(
               icon: IconButton(

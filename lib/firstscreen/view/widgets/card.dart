@@ -1,11 +1,16 @@
 
 import 'package:careerpoint2/jobdetails/jobdetails.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
+  MyCard({Key? key, required this.job}):super(key: key);
+    final QueryDocumentSnapshot<Map<String,dynamic>>job;
   @override
   Widget build(BuildContext context) {
+    
     return Card(
+
       elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -16,7 +21,7 @@ class MyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Senior Flutter Developer',
+             job['job title'].toString(),
             
               style: TextStyle(
                 fontSize: 20.0,

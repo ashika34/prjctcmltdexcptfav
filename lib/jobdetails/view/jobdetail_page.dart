@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JobDetail extends StatefulWidget {
   const JobDetail({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class JobDetail extends StatefulWidget {
 }
 
 class _JobDetailState extends State<JobDetail> {
+  final CollectionReference applicationsCollection =
+      FirebaseFirestore.instance.collection('applications');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,11 +225,20 @@ class _JobDetailState extends State<JobDetail> {
               height: 15,
             ),
             ElevatedButton(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => JobDetail()),
-    );
+  onPressed: ()async{
+    String userId = 'your_user_id_here';
+    await applicationsCollection.add(({
+      'userId': userId,
+      'jobTitle': 'Senior Flutter Developer',
+      'timestamp': FieldValue.serverTimestamp(),
+
+    }));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Application Submitted')));
+
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => JobDetail()),
+    // );
   },
   child: Text('Apply Now'),
   style: ElevatedButton.styleFrom(

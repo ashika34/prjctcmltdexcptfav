@@ -11,8 +11,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  // final emailcontroller =TextEditingController();
-  // final passordcontroller =TextEditingController();
+  
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -93,9 +92,11 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
+                    
                     onPressed: () async {
-                      try {
-                        final _auth = FirebaseAuth.instance;
+                       final _auth = FirebaseAuth.instance;
+                       try {
+                       final _auth = FirebaseAuth.instance;
                         final userRef = await _auth.signInWithEmailAndPassword(
                           email: email.text,
                           password: password.text,
@@ -109,11 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('Invalid username or Password')));
                       }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ));
+                      
                     },
                     child: Text('Login'),
                     style: ElevatedButton.styleFrom(

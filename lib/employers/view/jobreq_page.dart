@@ -1,7 +1,276 @@
+import 'package:careerpoint2/empjobdetail/empjobdetail.dart';
+import 'package:careerpoint2/employers/repo/jobreq_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+
+// class Employers extends StatefulWidget {
+//   Employers({Key? key}) : super(key: key);
+
+//   @override
+//   _EmployersState createState() => _EmployersState();
+// }
+
+// class empjobdetail extends StatelessWidget {
+//   final String jobTitle;
+
+//   empjobdetail(this.jobTitle);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Please Review'),
+//       ),
+//     );
+//   }
+// }
+
+// class _EmployersState extends State<Employers> {
+//   TextEditingController jobtitle = TextEditingController();
+//   TextEditingController qualification = TextEditingController();
+//   TextEditingController jobtype = TextEditingController();
+//   TextEditingController joblocation = TextEditingController();
+//   TextEditingController monthlysalary = TextEditingController();
+//   TextEditingController hiringprocess = TextEditingController();
+//   TextEditingController jobdescription = TextEditingController();
+
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+//   final FirebaseAuth _auth = FirebaseAuth.instance;
+//   late CollectionReference _jobRef;
+//   late FirebaseStorage _storage;
+
+//   final _formKey = GlobalKey<FormState>();
+
+//   @override
+//   List<String> jobTypes = ['Any', 'Full time', 'Part time', 'internship'];
+//   String? _selectedJobType;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _jobRef = _firestore.collection('add job');
+//     _storage = FirebaseStorage.instance;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: Colors.blue,
+//           title: Text('Post your Job'),
+//           leading: GestureDetector(
+//             onTap: () => Navigator.pop(context),
+//             child: Icon(Icons.arrow_back, color: Colors.white),
+//           ),
+//         ),
+//         body: SingleChildScrollView(
+//           child: Padding(
+//             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+//             child: Form(
+//                 key: _formKey,
+//                 child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Image.asset(
+//                         'assets/images/careerpoint.png',
+//                         height: 150,
+//                         width: 150,
+//                       ),
+//                       SizedBox(
+//                         height: 40,
+//                       ),
+//                       Text(
+//                         'Add Job Basics',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.bold, fontSize: 18),
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         keyboardType: TextInputType.name,
+//                         controller: jobtitle,
+//                         decoration: InputDecoration(
+//                           labelText: 'Job Title',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter a job title';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         keyboardType: TextInputType.name,
+//                         controller: qualification,
+//                         decoration: InputDecoration(
+//                           labelText: 'Qualification',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter the qualification';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       DropdownButtonFormField<String>(
+//                         value: _selectedJobType,
+//                         onChanged: (newValue) {
+//                           setState(() {
+//                             _selectedJobType = newValue;
+//                           });
+//                         },
+//                         items: jobTypes.map((type) {
+//                           return DropdownMenuItem<String>(
+//                             value: type,
+//                             child: Text(type),
+//                           );
+//                         }).toList(),
+//                         decoration: InputDecoration(
+//                           labelText: 'Job type',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please select a job type';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         keyboardType: TextInputType.text,
+//                         controller: joblocation,
+//                         decoration: InputDecoration(
+//                           labelText: 'Job Location',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter the job location';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         keyboardType: TextInputType.text,
+//                         controller: monthlysalary,
+//                         decoration: InputDecoration(
+//                           labelText: 'Monthly Salary',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter the monthly salary';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         keyboardType: TextInputType.text,
+//                         controller: hiringprocess,
+//                         decoration: InputDecoration(
+//                           labelText: 'Hiring Process',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter the hiring process';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       TextFormField(
+//                         maxLines: 5,
+//                         keyboardType: TextInputType.text,
+//                         controller: jobdescription,
+//                         decoration: InputDecoration(
+//                           labelText: 'Job Description',
+//                           border: OutlineInputBorder(),
+//                         ),
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter the job description';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       SizedBox(
+//                         height: 55,
+//                       ),
+//                       Container(
+//                         width: MediaQuery.of(context).size.width,
+//                         height: 50,
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             if (_formKey.currentState!.validate()) {
+//                               await _jobRef.add({
+//                                 'jobtitle': jobtitle.text,
+//                                 'qualification': qualification.text,
+//                                 'jobtype': _selectedJobType,
+//                                 'joblocation': joblocation.text,
+//                                 'monthlysalary': monthlysalary.text,
+//                                 'hiringprocess': hiringprocess.text,
+//                                 'jobdescription': jobdescription.text,
+//                                 'userid': _auth.currentUser!.uid,
+//                               });
+//                               ScaffoldMessenger.of(context).showSnackBar(
+//                                   SnackBar(
+//                                       content: Text('Added Successfully')));
+//                               jobtitle.clear();
+//                               qualification.clear();
+//                               _selectedJobType = null;
+//                               joblocation.clear();
+//                               monthlysalary.clear();
+//                               hiringprocess.clear();
+//                               jobdescription.clear();
+
+//                               Navigator.push(
+//                                 context,
+//                                 MaterialPageRoute(
+//                                   builder: (context) =>
+//                                       empjobdetail(jobtitle.text),
+//                                 ),
+//                               );
+//                             }
+//                           },
+//                           child: Text('Post Job'),
+//                           style: ElevatedButton.styleFrom(
+//                             shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadius.circular(30),
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+
+//           ])),
+//           ),
+//         ));
+
+//   }
+// }
 
 class Employers extends StatefulWidget {
   Employers({Key? key}) : super(key: key);
@@ -11,72 +280,114 @@ class Employers extends StatefulWidget {
 }
 
 class empjobdetail extends StatelessWidget {
+  final String jobTitle;
+  final String qualification;
+  final String jobType;
+  final String jobLocation;
+  final String monthlySalary;
+  final String hiringProcess;
+  final String jobDescription;
+
+  empjobdetail({
+    required this.jobTitle,
+    required this.qualification,
+    required this.jobType,
+    required this.jobLocation,
+    required this.monthlySalary,
+    required this.hiringProcess,
+    required this.jobDescription,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Please Review'),
-      ),
-    );
+        appBar: AppBar(
+          title: Text(
+            'Job Details',
+            style: TextStyle(fontSize: 21),
+          ),
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Image.asset(
+                  'assets/images/careerpoint.png',
+                  height: 150,
+                  width: 150,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Job Title: $jobTitle',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Qualification: $qualification',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Job Type: $jobType',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Job Location: $jobLocation',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Monthly Salary: $monthlySalary',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Hiring Process: $hiringProcess',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Job Description: $jobDescription',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+        ));
   }
 }
 
 class _EmployersState extends State<Employers> {
   TextEditingController jobtitle = TextEditingController();
   TextEditingController qualification = TextEditingController();
-  TextEditingController jobtype = TextEditingController();
   TextEditingController joblocation = TextEditingController();
+  TextEditingController jobtype = TextEditingController();
   TextEditingController monthlysalary = TextEditingController();
   TextEditingController hiringprocess = TextEditingController();
   TextEditingController jobdescription = TextEditingController();
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  late CollectionReference _jobRef;
-  late FirebaseStorage _storage;
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   List<String> jobTypes = ['Any', 'Full time', 'Part time', 'internship'];
   String? _selectedJobType;
 
-  @override
-  void initState() {
-    super.initState();
-    _jobRef = _firestore.collection('add job');
-    _storage = FirebaseStorage.instance;
-  }
-
-  // Function to build the edit dialog content
-  Widget buildEditDialog(BuildContext context, DocumentSnapshot document) {
-    TextEditingController editJobTitle = TextEditingController();
-    editJobTitle.text = document['jobtitle'] as String;
-
-    return AlertDialog(
-      title: Text('Edit Job Title'),
-      content: TextFormField(
-        controller: editJobTitle,
-        decoration: InputDecoration(labelText: 'Job Title'),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: Text('Cancel'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: Text('Save'),
-          onPressed: () async {
-            await _jobRef.doc(document.id).update({
-              'jobtitle': editJobTitle.text,
-            });
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +428,7 @@ class _EmployersState extends State<Employers> {
                   keyboardType: TextInputType.name,
                   controller: jobtitle,
                   decoration: InputDecoration(
-                    labelText: 'Job Title',
+                    labelText: 'Jobtitle',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -161,7 +472,7 @@ class _EmployersState extends State<Employers> {
                     );
                   }).toList(),
                   decoration: InputDecoration(
-                    labelText: 'Job type',
+                    labelText: 'Jobtype',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -178,7 +489,7 @@ class _EmployersState extends State<Employers> {
                   keyboardType: TextInputType.text,
                   controller: joblocation,
                   decoration: InputDecoration(
-                    labelText: 'Job Location',
+                    labelText: 'Joblocation',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -195,7 +506,7 @@ class _EmployersState extends State<Employers> {
                   keyboardType: TextInputType.text,
                   controller: monthlysalary,
                   decoration: InputDecoration(
-                    labelText: 'Monthly Salary',
+                    labelText: 'Monthlysalary',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -212,7 +523,7 @@ class _EmployersState extends State<Employers> {
                   keyboardType: TextInputType.text,
                   controller: hiringprocess,
                   decoration: InputDecoration(
-                    labelText: 'Hiring Process',
+                    labelText: 'Hiringprocess',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -230,7 +541,7 @@ class _EmployersState extends State<Employers> {
                   keyboardType: TextInputType.text,
                   controller: jobdescription,
                   decoration: InputDecoration(
-                    labelText: 'Job Description',
+                    labelText: 'Jobdescription',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -249,30 +560,18 @@ class _EmployersState extends State<Employers> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        await _jobRef.add({
-                          'jobtitle': jobtitle.text,
-                          'qualification': qualification.text,
-                          'jobtype': _selectedJobType,
-                          'joblocation': joblocation.text,
-                          'monthlysalary': monthlysalary.text,
-                          'hiringprocess': hiringprocess.text,
-                          'jobdescription': jobdescription.text,
-                          'userid': _auth.currentUser!.uid,
-                        });
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text('Added Successfully')));
-                        jobtitle.clear();
-                        qualification.clear();
-                        _selectedJobType = null;
-                        joblocation.clear();
-                        monthlysalary.clear();
-                        hiringprocess.clear();
-                        jobdescription.clear();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => empjobdetail(),
-                          ),
+                              builder: (context) => EmployerJd(
+                                    jobTitle: jobtitle,
+                                    qualification: qualification,
+                                    jobType: jobtype,
+                                    jobLocation: joblocation,
+                                    monthlySalary: monthlysalary,
+                                    hiringProcess: hiringprocess,
+                                    jobDescription: jobdescription,
+                                     )),
                         );
                       }
                     },
@@ -284,47 +583,6 @@ class _EmployersState extends State<Employers> {
                     ),
                   ),
                 ),
-
-                Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: _jobRef
-                        .where('userid', isEqualTo: _auth.currentUser!.uid)
-                        .snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData) {
-                        final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                        return ListView.builder(
-                          itemCount: documents.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final data = documents[index];
-                            return ListTile(
-                              title: Text(data['jobtitle'].toString()),
-                              trailing: SizedBox(
-                                width: MediaQuery.of(context).size.width * .28,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return buildEditDialog(context, data);
-                                          },
-                                        );
-                                      },
-                                      icon: Icon(Icons.edit),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }
-                      return CircularProgressIndicator();
-                    },
-                  ),
-                )
               ],
             ),
           ),
@@ -333,6 +591,3 @@ class _EmployersState extends State<Employers> {
     );
   }
 }
-
-
-
